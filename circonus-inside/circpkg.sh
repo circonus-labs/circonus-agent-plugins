@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUTPUT_DIR=/opt/circonus/nad/var/run
+OUTPUT_DIR=/opt/circonus/agent/cache
 OUTPUT_FILE=$OUTPUT_DIR/cpkg.list
 SUPPRESS_FILE=$OUTPUT_DIR/cpkg.wip
 CACHE_MINUTES=5
@@ -16,7 +16,7 @@ suppressions() {
 }
 
 if [ ! -d $OUTPUT_DIR ]; then
-	echo "error\ts\tbad cache directory"
+	echo "error bad cache directory ($OUTPUT_DIR)"
 	OUTPUT_FILE=/dev/null
 else
 	find $OUTPUT_FILE -mmin +$CACHE_MINUTES -exec rm {} \; 2>/dev/null
@@ -31,7 +31,7 @@ else
 	fi
 	if [ ! -w $OUTPUT_FILE ]; then
 		if ! touch $OUTPUT_FILE 2> /dev/null; then
-			echo "error\ts\tcannot create cache file"
+			echo "error cannot create cache file ($OUTPUT_FILE)"
 			OUTPUT_FILE=/dev/null
 		fi
 	fi
