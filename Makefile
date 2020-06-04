@@ -7,7 +7,7 @@ all:
 
 install:
 	install -d -m 0755 $(DESTDIR)$(PLUGIN_DIR)
-	for plug in cassandra common postgresql ; do \
+	for plug in cassandra circonus-inside common haproxy mysql ohai postgresql ; do \
 		install -d -m 0755 $(DESTDIR)$(PLUGIN_DIR)/$$plug ; \
 		cp -r $$plug/* $(DESTDIR)$(PLUGIN_DIR)/$$plug/. ; \
     done
