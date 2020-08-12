@@ -46,12 +46,12 @@ case `uname -s` in
             # Debian/Ubuntu
             /usr/bin/dpkg-query --show --showformat '${Package}\ts\t${Version}\n' 'circonus*' | /usr/bin/tee $OUTPUT_FILE
         else
-            printf "error\`distro\ts\tunsuported Linux distro\n"
+            printf "error\`distro\ts\tunsupported Linux distro\n"
         fi
         suppressions
         ;;
     *)
-        printf "error\`os\ts\tunsuported platform\n"
+        printf "error\`os\ts\tunsupported platform\n"
         exit
         ;;
 esac
