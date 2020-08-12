@@ -16,7 +16,7 @@ suppressions() {
 }
 
 if [[ ! -d $OUTPUT_DIR ]]; then
-    echo "error\ts\tbad cache directory"
+    printf "error\`cachedir\ts\tbad cache directory\n"
     OUTPUT_FILE=/dev/null
 else
     find $OUTPUT_FILE -mmin +$CACHE_MINUTES -exec rm {} \; 2>/dev/null
@@ -31,7 +31,7 @@ else
     fi
     if [[ ! -w $OUTPUT_FILE ]]; then
         if ! touch $OUTPUT_FILE 2> /dev/null; then
-            echo "error\ts\tcannot create cache file"
+            printf "error\`cachefile\ts\tcannot create cache file\n"
             OUTPUT_FILE=/dev/null
         fi
     fi
@@ -46,12 +46,12 @@ case `uname -s` in
             # Debian/Ubuntu
             /usr/bin/dpkg-query --show --showformat '${Package}\ts\t${Version}\n' 'circonus*' | /usr/bin/tee $OUTPUT_FILE
         else
-            echo "error\ts\tunsuported Linux distro"
+            printf "error\`distro\ts\tunsuported Linux distro\n"
         fi
         suppressions
         ;;
     *)
-        echo "error\ts\tunsuported platform"
+        printf "error\`os\ts\tunsuported platform\n"
         exit
         ;;
 esac
