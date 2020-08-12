@@ -39,9 +39,9 @@ fi
 
 case `uname -s` in
     Linux)
-        if [[ -f /etc/redhat_release ]]; then
+        if [[ -f /etc/redhat-release ]]; then
             # RHEL/CentOS
-            /bin/rpm -qa --queryformat '%{NAME}\ts\t%{VERSION}-%{RELEASE}\n' circonus* | /usr/bin/tee $OUTPUT_FILE
+            /bin/rpm -qa --queryformat '%{NAME}\ts\t%{VERSION}-%{RELEASE}\n' 'circonus*' | /usr/bin/tee $OUTPUT_FILE
         elif [[ -f /etc/lsb-release ]]; then
             # Debian/Ubuntu
             /usr/bin/dpkg-query --show --showformat '${Package}\ts\t${Version}\n' 'circonus*' | /usr/bin/tee $OUTPUT_FILE
